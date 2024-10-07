@@ -3,13 +3,18 @@ from kivy.uix.gridlayout import GridLayout
 from kivy.uix.label import Label
 from kivy.uix.button import Button
 from kivy.uix.image import Image
+from kivy.uix.behaviors import ButtonBehavior
 from kivy.uix.screenmanager import Screen
 from kivy.uix.widget import Widget
 from kivy.graphics import Color, Rectangle
+from kivy.app import App
+
+class ImageButton(ButtonBehavior, Image):
+    pass
 
 class MainScreen(Screen):
-    def __init__(self, **kwargs):
-        super(MainScreen, self).__init__(**kwargs)
+    def _init_(self, **kwargs):
+        super(MainScreen, self)._init_(**kwargs)
 
         # Layout utama
         layout = BoxLayout(orientation='vertical')
@@ -22,8 +27,9 @@ class MainScreen(Screen):
         greeting_label = Label(text="Hi, ADMIN1", size_hint_x=0.3, halign='right', valign='middle')
 
         # Ikon profil
-        profile_icon = Image(source='picture/profile_icon.png', size_hint=(0.1, 1))  # Ganti dengan path gambar ikon profil
-
+        profile_icon = ImageButton(source='picture/profile_icon.png', size_hint=(0.1, 1))
+        profile_icon.bind(on_press=self.go_to_profile)  # Bind ke fungsi perpindahan layar
+        
         header.add_widget(greeting_label)
         header.add_widget(company_label)
         header.add_widget(profile_icon)
@@ -67,6 +73,8 @@ class MainScreen(Screen):
         menu_layout = GridLayout(cols=1, size_hint=(1, 0.45), spacing=10, padding=[10, 10, 10, 20])
 
         absensi_button = Button(text="ABSENSI KARYAWAN", font_size=16)
+        absensi_button.bind(on_press=self.go_to_absensi) 
+
         daftar_karyawan_button = Button(text="DAFTAR KARYAWAN", font_size=16)
         daftar_gaji_button = Button(text="DAFTAR GAJI KARYAWAN", font_size=16)
         cek_gaji_button = Button(text="CEK DATA GAJI KARYAWAN", font_size=16)
@@ -83,6 +91,12 @@ class MainScreen(Screen):
         # Bind ukuran widget ke fungsi resize agar grafik disesuaikan
         chart_left.bind(size=self.update_chart_left, pos=self.update_chart_left)
         chart_right.bind(size=self.update_chart_right, pos=self.update_chart_right)
+
+    def go_to_profile(self, instance):
+        self.manager.current = 'profil'  # Pastikan ini sesuai dengan nama yang diberikan saat layar ditambahkan
+
+    def go_to_absensi(self, instance):
+        self.manager.current = 'absensi'
 
     def update_chart_left(self, instance, value):
         self.chart_left_rect.size = instance.size
