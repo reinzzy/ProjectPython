@@ -7,28 +7,25 @@ from kivy.uix.behaviors import ButtonBehavior
 from kivy.uix.screenmanager import Screen
 from kivy.uix.widget import Widget
 from kivy.graphics import Color, Rectangle
-from kivy.app import App
 
 class ImageButton(ButtonBehavior, Image):
     pass
 
 class MainScreen(Screen):
-    def _init_(self, **kwargs):
-        super(MainScreen, self)._init_(**kwargs)
+    def __init__(self, **kwargs):
+        super(MainScreen, self).__init__(**kwargs)
 
         # Layout utama
         layout = BoxLayout(orientation='vertical')
 
         # Bagian Header
         header = BoxLayout(orientation='horizontal', size_hint=(1, 0.15), padding=10)
-        
-        # Nama Perusahaan dan Greeting
+
         company_label = Label(text="PT. ABADI SELALU", font_size=24, bold=True)
         greeting_label = Label(text="Hi, ADMIN1", size_hint_x=0.3, halign='right', valign='middle')
 
-        # Ikon profil
         profile_icon = ImageButton(source='picture/profile_icon.png', size_hint=(0.1, 1))
-        profile_icon.bind(on_press=self.go_to_profile)  # Bind ke fungsi perpindahan layar
+        profile_icon.bind(on_press=self.go_to_profile)
         
         header.add_widget(greeting_label)
         header.add_widget(company_label)
@@ -41,17 +38,15 @@ class MainScreen(Screen):
         chart_title = Label(text="[color=6495ED]Data Karyawan Yang Sudah Ter-Rekap[/color]", markup=True, font_size=16, halign='center')
         chart = BoxLayout(orientation='horizontal')
 
-        # Widget "Sudah" dan "Belum" untuk Chart
-        chart_left = Widget(size_hint_x=0.7)  # Widget kiri untuk "Sudah"
-        chart_right = Widget(size_hint_x=0.3)  # Widget kanan untuk "Belum"
+        chart_left = Widget(size_hint_x=0.7)
+        chart_right = Widget(size_hint_x=0.3)
 
-        # Buat grafik dengan menggunakan Canvas
         with chart_left.canvas:
-            Color(0.39, 0.58, 0.93, 1)  # Warna biru untuk "Sudah"
+            Color(0.39, 0.58, 0.93, 1)
             self.chart_left_rect = Rectangle(size=chart_left.size, pos=chart_left.pos)
 
         with chart_right.canvas:
-            Color(0.94, 0.5, 0.5, 1)  # Warna merah untuk "Belum"
+            Color(0.94, 0.5, 0.5, 1)
             self.chart_right_rect = Rectangle(size=chart_right.size, pos=chart_right.pos)
 
         chart.add_widget(chart_left)
@@ -73,7 +68,7 @@ class MainScreen(Screen):
         menu_layout = GridLayout(cols=1, size_hint=(1, 0.45), spacing=10, padding=[10, 10, 10, 20])
 
         absensi_button = Button(text="ABSENSI KARYAWAN", font_size=16)
-        absensi_button.bind(on_press=self.go_to_absensi) 
+        absensi_button.bind(on_press=self.go_to_absensi)
 
         daftar_karyawan_button = Button(text="DAFTAR KARYAWAN", font_size=16)
         daftar_gaji_button = Button(text="DAFTAR GAJI KARYAWAN", font_size=16)
@@ -88,12 +83,11 @@ class MainScreen(Screen):
 
         self.add_widget(layout)
 
-        # Bind ukuran widget ke fungsi resize agar grafik disesuaikan
         chart_left.bind(size=self.update_chart_left, pos=self.update_chart_left)
         chart_right.bind(size=self.update_chart_right, pos=self.update_chart_right)
 
     def go_to_profile(self, instance):
-        self.manager.current = 'profil'  # Pastikan ini sesuai dengan nama yang diberikan saat layar ditambahkan
+        self.manager.current = 'profil'
 
     def go_to_absensi(self, instance):
         self.manager.current = 'absensi'
