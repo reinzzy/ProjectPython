@@ -19,31 +19,13 @@ class AbsensiScreen(Screen):
 
         layout.add_widget(header_layout)
 
-        # Bagian Input Tanggal
-        date_layout = BoxLayout(orientation='horizontal', size_hint=(1, 0.1))
-        date_layout.add_widget(Label(text='Day'))
-        self.day_input = TextInput(hint_text='DD', multiline=False)
-        date_layout.add_widget(self.day_input)
-
-        date_layout.add_widget(Label(text='Month'))
-        self.month_input = TextInput(hint_text='MM', multiline=False)
-        date_layout.add_widget(self.month_input)
-
-        date_layout.add_widget(Label(text='Year'))
-        self.year_input = TextInput(hint_text='YYYY', multiline=False)
-        date_layout.add_widget(self.year_input)
-
-        # Tombol search
-        search_button = Button(text='Search')
-        date_layout.add_widget(search_button)
-
-        layout.add_widget(date_layout)
+       
 
         # Bagian Tabel Absensi
         table_layout = GridLayout(cols=3, size_hint=(1, 0.6), spacing=10)
         table_layout.add_widget(Label(text='Nama', bold=True))
         table_layout.add_widget(Label(text='Tanggal', bold=True))
-        table_layout.add_widget(Label(text='Ket', bold=True))
+        table_layout.add_widget(Label(text='Keterangan', bold=True))
 
         # Data absensi contoh
         absensi_data = [

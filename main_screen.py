@@ -71,6 +71,8 @@ class MainScreen(Screen):
         absensi_button.bind(on_press=self.go_to_absensi)
 
         daftar_karyawan_button = Button(text="DAFTAR KARYAWAN", font_size=16)
+        daftar_karyawan_button.bind(on_press=self.go_to_employee_registration)
+        
         daftar_gaji_button = Button(text="DAFTAR GAJI KARYAWAN", font_size=16)
         cek_gaji_button = Button(text="CEK DATA GAJI KARYAWAN", font_size=16)
 
@@ -91,6 +93,9 @@ class MainScreen(Screen):
 
     def go_to_absensi(self, instance):
         self.manager.current = 'absensi'
+    
+    def go_to_employee_registration(self, instance):
+        self.manager.current = 'employee_registration'
 
     def update_chart_left(self, instance, value):
         self.chart_left_rect.size = instance.size
