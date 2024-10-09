@@ -7,6 +7,7 @@ from kivy.uix.behaviors import ButtonBehavior
 from kivy.uix.screenmanager import Screen
 from kivy.uix.widget import Widget
 from kivy.graphics import Color, Rectangle
+from kivy.config import Config
 
 Config.set('input', 'mouse', 'mouse,disable_multitouch')
 
