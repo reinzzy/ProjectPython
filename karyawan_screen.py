@@ -9,7 +9,6 @@ from kivy.uix.popup import Popup
 from kivy.config import Config
 
 Config.set('input', 'mouse', 'mouse,disable_multitouch')
-
 Config.set('kivy', 'keyboard_mode', 'system')
 
 # Screen untuk pendaftaran karyawan
@@ -17,6 +16,16 @@ class EmployeeRegistrationScreen(Screen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         layout = BoxLayout(orientation='vertical', padding=10, spacing=10)
+
+        # Membuat header_layout
+        header_layout = BoxLayout(orientation='horizontal', size_hint=(1, 0.15))
+
+        # Tombol kembali
+        back_button = Button(text='< Kembali', size_hint=(0.2, 0.2), on_press=self.go_back)
+        header_layout.add_widget(back_button)
+
+        # Menambahkan header ke layout utama
+        layout.add_widget(header_layout)
 
         # Form input karyawan
         self.first_name_input = TextInput(hint_text="Nama Depan", multiline=False)
@@ -34,7 +43,7 @@ class EmployeeRegistrationScreen(Screen):
         input_button = Button(text="INPUT", size_hint=(1, 0.2))
         input_button.bind(on_press=self.submit_data)
 
-        # Menambahkan widget ke layout
+        # Menambahkan widget ke layout utama
         layout.add_widget(Label(text="PT. ABADI SELALU", font_size=24))
         layout.add_widget(self.first_name_input)
         layout.add_widget(self.last_name_input)
@@ -78,6 +87,10 @@ class EmployeeRegistrationScreen(Screen):
             popup = Popup(title="Error", content=Label(text="Semua kolom wajib diisi!"), size_hint=(0.6, 0.4))
             popup.open()
 
+    # Fungsi untuk kembali ke layar utama
+    def go_back(self, instance):
+        self.manager.current = 'main'
+
 # Screen untuk daftar karyawan
 class EmployeeListScreen(Screen):
     def __init__(self, **kwargs):
@@ -102,3 +115,7 @@ class EmployeeListScreen(Screen):
         row_layout.add_widget(Label(text=job))
         row_layout.add_widget(Label(text=status))
         self.layout.add_widget(row_layout)
+        
+    def go_back(self, instance):
+        # Mengubah layar kembali ke MainScreen
+        self.manager.current = 'main'
