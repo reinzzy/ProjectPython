@@ -7,6 +7,10 @@ from kivy.uix.button import Button
 from kivy.uix.filechooser import FileChooserIconView
 from kivy.uix.popup import Popup
 
+Config.set('input', 'mouse', 'mouse,disable_multitouch')
+
+Config.set('kivy', 'keyboard_mode', 'system')
+
 # Screen untuk pendaftaran karyawan
 class EmployeeRegistrationScreen(Screen):
     def __init__(self, **kwargs):

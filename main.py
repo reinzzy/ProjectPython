@@ -7,10 +7,8 @@ from profil_screen import ProfilScreen
 from absensi_screen import AbsensiScreen
 from karyawan_screen import EmployeeRegistrationScreen, EmployeeListScreen
 
-# Menambahkan SDL2 sebagai input provider
 Config.set('input', 'mouse', 'mouse,disable_multitouch')
 
-# Nonaktifkan virtual keyboard
 Config.set('kivy', 'keyboard_mode', 'system')
 
 class GajiKaryawanApp(App):

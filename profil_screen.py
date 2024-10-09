@@ -4,6 +4,10 @@ from kivy.uix.button import Button
 from kivy.uix.screenmanager import Screen, ScreenManager
 from kivy.app import App
 
+Config.set('input', 'mouse', 'mouse,disable_multitouch')
+
+Config.set('kivy', 'keyboard_mode', 'system')
+
 class ProfilScreen(Screen):
     def __init__(self, **kwargs):
         super(ProfilScreen, self).__init__(**kwargs)

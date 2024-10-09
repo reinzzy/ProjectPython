@@ -8,6 +8,10 @@ from kivy.uix.screenmanager import Screen
 from kivy.uix.widget import Widget
 from kivy.graphics import Color, Rectangle
 
+Config.set('input', 'mouse', 'mouse,disable_multitouch')
+
+Config.set('kivy', 'keyboard_mode', 'system')
+
 class ImageButton(ButtonBehavior, Image):
     pass
 

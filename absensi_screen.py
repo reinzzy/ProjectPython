@@ -3,7 +3,11 @@ from kivy.uix.gridlayout import GridLayout
 from kivy.uix.label import Label
 from kivy.uix.button import Button
 from kivy.uix.textinput import TextInput
-from kivy.uix.screenmanager import Screen
+from kivy.uix.screenmanager import Screen, ScreenManager
+
+Config.set('input', 'mouse', 'mouse,disable_multitouch')
+
+Config.set('kivy', 'keyboard_mode', 'system')
 
 class AbsensiScreen(Screen):
     def __init__(self, **kwargs):
@@ -40,7 +44,12 @@ class AbsensiScreen(Screen):
             table_layout.add_widget(Label(text=data['nama']))
             table_layout.add_widget(Label(text=" ".join(data['tanggal'])))
             table_layout.add_widget(Label(text=f"Sakit: {data['sakit']}, Ijin: {data['ijin']}"))
-
-        layout.add_widget(table_layout)
+            
+             # Tombol kembali ke main screen
+        back_button = Button(text="Kembali ke Main Screen", size_hint=(1, 0.1), on_press=self.go_back)
+        layout.add_widget(back_button)
 
         self.add_widget(layout)
+
+    def go_back(self, instance):
+        self.manager.current = 'main'
